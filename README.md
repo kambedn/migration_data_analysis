@@ -1,1 +1,1 @@
-# programowanie_obiektowe_KamilBednarz
+Program przetwarza dane na temat światowej migracji pracowników (kraje docelowe migracji, umiejętności i sektor przemysłu pracowników) i prezentuje je w formie, która pomoże odbiorcy zrozumieć globalne trendy migracyjne. Dane zostały zgromadzone w serwisie Linkedin.
