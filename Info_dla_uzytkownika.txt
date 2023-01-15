@@ -1,0 +1,34 @@
+Program wczytuje dane z plików:
+
+country_migration_public.csv,
+industry_migration_public.csv,
+skill_migration_public.csv,
+
+które są dostępne w repozytorium programu.
+
+Po wczytaniu i przetworzeniu danych program wypisuje
+listę państw, dla których zostały zgromadzone dane.
+
+Program następnie będzie czekał na wpisanie jednej 
+nazwy państwa z listy wypisanej powyżej.
+
+Jeśli nazwa państwa nie będzie znajdować się na liście,
+program wypisze komunikat "No data for this country".
+
+Żeby zamknąć program w miejsce nazwy państwa trzeba wpisać 1 i wcisnąć enter.
+Aby program ponownie wypisał listę wszystkich dostępnych państw, należy
+wprowadzić 2 i wcisnąć enter. 
+
+Niektóre państwa mogą mieć ograniczone dane, np. posiadać dane tylko z jednego roku.
+Statystki są obliczane wtedy na podstawie tylko dostępnych rekordów.
+
+Wszystkie statystki (oprócz odległości liczonej w kilometrach) są obliczane
+w jednostce "wartość netto na 10 tysięcy obywateli".
+
+Jeżeli w wyjściowych statystykach pojawiają się wartości ujemne oznacza to, że
+dane saldo migracji było ujemne.
+
+Jeśli w konkretnej kategorii danych wskazane państwo nie pojawiło się,
+program wypisze komunikat "No data". 
+
+
