@@ -1,0 +1,11 @@
+Program został napisany w Visual Studio 2022.
+Wymaga dołączenia następujących bibliotek:
+-iostream,
+-algorithm,
+-fstream,
+-map,
+-sstream,
+-string,
+-vector,
+-cmath,
+-iomanip.
