@@ -146,7 +146,7 @@ vector<vector<string>> readCSV( const string& filename ) {
 }
 
 //This function loads migration data from a 2D vector of strings into a vector of migration_Country objects.
-//It first creates a map that stores the number of occurrences of each country code.
+//In the first place it creates a map that stores the number of occurrences of each country code.
 //Then, it iterates through the map and creates a Country object for each entry in the map.
 //For each Country object, it stores the relevant data from the 2D vector of strings in the object.
 //Finally, it creates a migration_Country object by moving the Country object into it and adding the remaining data from the 2D vector of strings.
@@ -345,17 +345,17 @@ void write_top_directions( vector<migration_Country>& migration_countries, const
 
 int main() {
 
-	//we create vectors for each type of data
+	//create vectors for each type of data
 	vector<migration_Country> migration_countries;
 	vector<Industry> industries;
 	vector<Skill> skills;
 
-	//we load the data from the files
+	//load the data from the files
 	vector<vector<string>> migration_data = readCSV( "country_migration_public.csv" );
 	vector<vector<string>> industries_data = readCSV( "industry_migration_public.csv" );
 	vector<vector<string>> skills_data = readCSV( "skill_migration_public.csv" );
 
-	//we process the data
+	//process the data
 	load_migration_data( migration_countries, migration_data );
 	load_industries_data( industries, industries_data );
 	load_skills_data( skills, skills_data );
@@ -365,7 +365,7 @@ int main() {
 	industries_data.clear();
 	skills_data.clear();
 
-	//we create a map, so we can print names of countries
+	//create a map, so we can print names of countries
 	map <string, int> countries;
 	for( auto& c : migration_countries )
 	{
