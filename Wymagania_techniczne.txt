@@ -9,3 +9,4 @@ Wymaga dołączenia następujących bibliotek:
 -vector,
 -cmath,
 -iomanip.
+Wymaga kompilatora C++ 11.
