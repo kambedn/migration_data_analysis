@@ -1,0 +1,61 @@
+1.Klasy i struktury
+Struktura cords_pair zawiera dwie pary typu double-double, które służą do przechowywania danych dotyczących współrzędnych geograficznych kraju bazowego oraz porównywanego z bazowym.
+Klasa Country jest klasą bazową dla pozostałych 3 klas. Posiada zmienne prywatne zawierające informacje o kraju bazowym, konstruktor oraz metody umożliwiające dostęp do zmiennych prywatnych.
+Klasy migration_country, Skill i Industry dziedziczą z klasy Country. Zawierają własne zmienne prywatne specyficzne dla konkretnego rodzaju wczytywanych danych oraz metody 
+umożliwiające dostęp do tych klas, a także dziedziczony konstruktor klasy.
+
+2.Wczytywanie danych
+Do wczytywania danych używam funkcji readCSV, która zwraca obiekt typu vector<vector<string>>.
+Funkcja otwiera plik do odczytu i tworzy dwuwymiarowy wektor typu string. Następnie w pętli następuje
+wczytywanie oddzielnie każdej linii pliku. Każda linia w zagnieżdżonej pętli jest ponadto dzielona na stringi oddzielone przecnikiem,
+gdzie każdy łańcuch tekstowy to oddzielna informacja (wartość) z wczytywanej linii. 
+Elementami wektora "data" są wektory, których elementami są poszczególne informacje z danej linii.
+W taki sposób łatwo dostać się do konkretnej linii lub jej poszczególnych składowych.
+
+3.Przetwarzanie danych
+Przetwarzanie danych dotyczących migracji pracowników odbywa się w funkcji load_migration_data.
+Funkcja ta przyjmuje za argumenty:
+a) wektor typu migration_country, w którym będą zapisane wszystkie rekordy dotyczące z migracją,
+b) wektor 2D typu string ze wczytanymi danymi.
+Funkcja tworzy mapę typu <string,int> i dla każdego elementu wektora 2D zlicza ile jest rekordów dla danego (kodu) państwa.
+Iteracje w pętli zaczynam od 1, ponieważ w pliku występuje nagłówek.
+Następnie dla każdego kraju w stworzonej mapie następuje w pętli (liczba iteracji równa liczbie wystąpienia kodu kraju w wektorze 2D):
+-zapisanie danych dotyczacych migracji (maksymalnie 5 danych, jeśli mniej, to wyjście z pętli) po uprzednim zamienieniu typu danych na double,
+-stworzenie tymczasowego obiektu Country, które zawiera dane: kod kraju, nazwe kraju, region gospodarczy, region geograficzny oraz wektor z rocznymi saldami migracji do danego państwa
+-do wektora typu migration_country, następuję dodanie obiektu tego typu, podczas czego wywoływany jest konstruktor klasy migration_country wykonujący funkcję move na obiekcie temp_country.
+W taki sposób otrzymujemy wektor migration_country, który zawiera obiekty, z których dzięki metodom klasy możemy uzyskać interesujące nas informacje.
+
+Funkcje dla przetwarzania danych dotyczących umiejętności i przemysłu (load_skills_data i load_industries_data) działają analogicznie.
+
+4.Wypisywanie danych
+Wypisywaniem danych o przemyśle i umiejętnościach zajmują się funkcje write_top_industries oraz write_top_skills.
+Funkcje za argumenty przyjmują referencję do wektora z danymi o określonym typie oraz nazwę kraju, dla którego chcę wypisać dane.
+Funkcje tworzą pomocniczy wektor par string-double, którego elemtami stają się nazwa przemysłu/umiejętności oraz wyliczane za pomocą funkcji typu inline średnie saldo migracji.
+Jeśli dla danego państwa nie ma danych (pomocniczy wektor jest pusty) to funkcje wypisuje komunikat "No data".
+Następnie pomocniczy wektor jest sortowany za pomocą funkcji sort z użytą funkcją lambda, która wskazuje, że sortowanie odbywa się względem średnich sald migracji.
+Ostatecznie funkcja wypisuje top rekordów określonych za pomocą globalnego constexpr lub wszystkie dane, jeśli ich liczba jest mniejsza niż top.
+
+ 
+4.1.Obliczanie odległości między państwami i wypisywanie danych o migracji
+Funkcja distance_in_km przyjmuje za argumenty 2 pary typu double-double, które zawierają współrzędne geograficznych danych punktów w interesujących nas państwach. 
+Za pomocą mądrego geograficznego wzoru zwraca liczbę kilometrów dzielących te punkty.
+
+Funkcja write_top_directions działa podobnie jak pozostałe dwie funkcje przeznaczone dla wypisywania danych, lecz tutaj używana jest struktura, ponieważ istotne dla nas 
+są 3 elementy: nazwa kraju, średnie saldo migracji, współrzędne geograficzne.
+Przy wypisywaniu używane są narzędzia biblioteki sstream, aby w znacznym stopniu wyrównywać wypisywane wyniki.
+
+
+5.Funkcja main
+a)Deklaracja wektorów typów migration_country, Skill, Industry, które będą przechowywać wczytane i przetworzone dane.
+b)Inicjalizacja zmiennych poprzez wywołanie funkcji read_CSV.
+c)Przetwarzanie danych i zapisanie je w poprzednio zdeklarowanych wektorach.
+d)Wyczyszczenie wektorów używanych do wczytywania danych.
+e)Stworzenie mapy typu string-int, gdzie kluczem jest nazwa kraju, a wartością liczba rekordów w wektorze typu migration_country dla danego państwa.
+f)Wypisanie listy wszystkich dostępnych krajów oraz ich liczbę.
+g)Nieskończona pętla, w której użytkownik może:
+-wyjść z pętli wpisując 1,
+-wypisać ponownie listę krajów wpisując 2,
+-wypisać dane dla państwa.
+Program przy pomocy funkcji find_if oraz funkcji typu lambda szuka, czy w wektorze migration_country znajduje się obiekt, którego składowa nazwy państwa jest zgodna z nazwą wprowadzoną przez użytkownika.
+Jeśli nie to funkcja wypisuje komunikat "No data for this country" i przechodzi do następnej iteracji pętli while.
+Jeśli tak to wypisywany jest region gospodarczy, geograficznych oraz konkretne statystyki migracji dla wskazanego państwa.
