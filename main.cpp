@@ -296,8 +296,6 @@ double distance_in_km( const pair<double, double> coord1, const pair <double, do
 	double lon_diff = (lon2 - lon1) * PI / 180.0;
 	lat1 = lat1 * PI / 180.0;
 	lat2 = lat2 * PI / 180.0;
-	lon1 = lon1 * PI / 180.0;
-	lon2 = lon2 * PI / 180.0;
 
 	double a = sin( lat_diff / 2 ) * sin( lat_diff / 2 ) +
 		cos( lat1 ) * cos( lat2 ) * sin( lon_diff / 2 ) * sin( lon_diff / 2 );
