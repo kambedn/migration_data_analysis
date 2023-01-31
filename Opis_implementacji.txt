@@ -15,8 +15,8 @@ W taki sposób łatwo dostać się do konkretnej linii lub jej poszczególnych s
 3.Przetwarzanie danych
 Przetwarzanie danych dotyczących migracji pracowników odbywa się w funkcji load_migration_data.
 Funkcja ta przyjmuje za argumenty:
-a) wektor typu migration_country, w którym będą zapisane wszystkie rekordy dotyczące z migracją,
-b) wektor 2D typu string ze wczytanymi danymi.
+a) referencję do wektora typu migration_country, w którym będą zapisane wszystkie rekordy dotyczące z migracją,
+b) referencję do wektora 2D typu string ze wczytanymi danymi.
 Funkcja tworzy mapę typu <string,int> i dla każdego elementu wektora 2D zlicza ile jest rekordów dla danego (kodu) państwa.
 Iteracje w pętli zaczynam od 1, ponieważ w pliku występuje nagłówek.
 Następnie dla każdego kraju w stworzonej mapie następuje w pętli (liczba iteracji równa liczbie wystąpienia kodu kraju w wektorze 2D):
@@ -29,9 +29,9 @@ Funkcje dla przetwarzania danych dotyczących umiejętności i przemysłu (load_
 
 4.Wypisywanie danych
 Wypisywaniem danych o przemyśle i umiejętnościach zajmują się funkcje write_top_industries oraz write_top_skills.
-Funkcje za argumenty przyjmują referencję do wektora z danymi o określonym typie oraz nazwę kraju, dla którego chcę wypisać dane.
+Funkcje za argumenty przyjmują referencję do wektora z danymi o określonym typie oraz do nazwy kraju, dla którego chcę wypisać dane.
 Funkcje tworzą pomocniczy wektor par string-double, którego elemtami stają się nazwa przemysłu/umiejętności oraz wyliczane za pomocą funkcji typu inline średnie saldo migracji.
-Jeśli dla danego państwa nie ma danych (pomocniczy wektor jest pusty) to funkcje wypisuje komunikat "No data".
+Jeśli dla danego państwa nie ma danych (pomocniczy wektor jest pusty), to funkcje wypisuje komunikat "No data".
 Następnie pomocniczy wektor jest sortowany za pomocą funkcji sort z użytą funkcją lambda, która wskazuje, że sortowanie odbywa się względem średnich sald migracji.
 Ostatecznie funkcja wypisuje top rekordów określonych za pomocą globalnego constexpr lub wszystkie dane, jeśli ich liczba jest mniejsza niż top.
 
